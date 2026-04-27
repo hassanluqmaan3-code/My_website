@@ -1,0 +1,589 @@
+<!-- #region --><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NSC Past Papers — South Africa</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg:#E8F1FF;--surface:#F6FAFF;--surface2:#DDE9FF;--border:#B8C9EA;
+    --text:#000000;--muted:#11325b;--accent:#1A4A9A;--al:#C9DBFF;
+    --red:#8FBCD6;--rl:#B6D2F0;--gold:#213b5f;--gl:#EAF2FF;
+    --blue:#092659;--bl:#DDE9FF;--r:10px;
+  }
+  body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:15px}
+
+  header{background:var(--accent);padding:1.8rem 2rem 1.4rem;position:sticky;top:0;z-index:100;box-shadow:0 2px 20px rgba(0,0,0,.15)}
+  .hi{max-width:1100px;margin:0 auto}
+  .ht{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.1rem;gap:1rem;flex-wrap:wrap}
+  .logo{display:flex;align-items:center;gap:12px}
+  .li{width:36px;height:36px;background:var(--red);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:14px;color:#fff;flex-shrink:0}
+  h1{font-family:'Syne',sans-serif;font-weight:800;font-size:1.25rem;color:#fff;line-height:1.1}
+  .sub{font-size:11px;color:rgba(255,255,255,.5);font-weight:300;margin-top:2px}
+  .controls{display:flex;gap:8px;flex-wrap:wrap}
+  input[type=text]{padding:8px 13px;border:1.5px solid rgba(255,255,255,.2);border-radius:var(--r);background:rgba(255,255,255,.1);color:#fff;font-family:'DM Sans',sans-serif;font-size:14px;width:190px;outline:none}
+  input[type=text]::placeholder{color:rgba(255,255,255,.38)}
+  input[type=text]:focus{border-color:rgba(255,255,255,.48);background:rgba(255,255,255,.14)}
+  select{padding:8px 28px 8px 11px;border:1.5px solid rgba(255,255,255,.2);border-radius:var(--r);background:rgba(255,255,255,.1) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='rgba(255,255,255,.55)' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 9px center;color:#fff;font-family:'DM Sans',sans-serif;font-size:14px;outline:none;cursor:pointer;appearance:none;-webkit-appearance:none}
+  select option{background:#1E4D3B}
+  .tabs{display:flex;gap:6px;flex-wrap:wrap}
+  .tab{padding:6px 16px;border-radius:999px;font-family:'Syne',sans-serif;font-weight:700;font-size:13px;cursor:pointer;border:1.5px solid rgba(255,255,255,.22);background:transparent;color:rgba(255,255,255,.58);transition:all .18s}
+  .tab:hover{background:rgba(255,255,255,.1);color:#fff}
+  .tab.active{background:#fff;color:var(--accent);border-color:#fff}
+
+  main{max-width:1100px;margin:0 auto;padding:1.5rem 1.5rem 3rem}
+  .sr{display:flex;gap:10px;margin-bottom:1.4rem;flex-wrap:wrap}
+  .sc{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:11px 17px}
+  .sn{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--accent);line-height:1}
+  .sl{font-size:12px;color:var(--muted);margin-top:2px}
+
+  /* Subject accordion */
+  .subject-block{margin-bottom:1.5rem}
+  .subject-hdr{display:flex;align-items:center;gap:12px;margin-bottom:10px;cursor:pointer;user-select:none}
+  .subject-hdr:hover .sname{opacity:.8}
+  .sname{font-family:'Syne',sans-serif;font-weight:800;font-size:17px;color:var(--accent);white-space:nowrap}
+  .sline{flex:1;height:1px;background:var(--border)}
+  .scnt{font-size:12px;color:var(--muted);background:var(--surface2);padding:3px 10px;border-radius:999px;white-space:nowrap}
+
+  .papers-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+
+  .paper-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:14px 15px;display:flex;flex-direction:column;gap:10px;transition:transform .14s,box-shadow .14s,border-color .14s}
+  .paper-card:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(30,77,59,.09);border-color:#8ABFB0}
+  .ct{display:flex;justify-content:space-between;align-items:center}
+  .cy{font-family:'Syne',sans-serif;font-weight:800;font-size:20px;color:var(--accent)}
+  .eb{font-size:11px;font-weight:500;padding:3px 9px;border-radius:999px}
+  .eb-nov{background:var(--al);color:var(--accent)}
+  .eb-june{background:var(--bl);color:var(--blue)}
+  .eb-mock{background:var(--rl);color:var(--red)}
+  .eb-march{background:var(--gl);color:var(--gold)}
+
+  .ca{display:flex;gap:6px;flex-wrap:wrap}
+  .db{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;padding:5px 11px;border-radius:999px;text-decoration:none;transition:opacity .14s;border:1px solid;cursor:pointer}
+  .db:hover{opacity:.75}
+  .db-p1{background:var(--al);color:var(--accent);border-color:#9FCCC0}
+  .db-p2{background:var(--bl);color:var(--blue);border-color:#B0C8F5}
+  .db-p3{background:#F0EBF8;color:#5A2D8A;border-color:#C8AEE8}
+  .db-memo{background:var(--gl);color:var(--gold);border-color:#E0C870}
+  .db-folder{background:var(--surface2);color:var(--muted);border-color:var(--border)}
+
+  .cf{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:4px}
+
+  .notice{background:var(--al);border:1px solid #A8CFC2;border-radius:var(--r);padding:11px 15px;font-size:13px;color:var(--accent);margin-bottom:1.4rem;line-height:1.5;display:flex;gap:10px;align-items:flex-start}
+  .empty{text-align:center;padding:4rem 1rem;color:var(--muted)}
+  .empty h3{font-family:'Syne',sans-serif;font-weight:700;margin-bottom:.4rem;color:var(--text)}
+  footer{text-align:center;padding:2rem;font-size:12px;color:var(--muted);border-top:1px solid var(--border);margin-top:1rem}
+
+  @media(max-width:600px){
+    header{padding:1.2rem 1rem 1rem;position:relative}
+    input[type=text]{width:100%}
+    .papers-grid{grid-template-columns:1fr}
+    .tabs{flex-wrap:wrap}
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="hi">
+    <div class="ht">
+      <div class="logo">
+        <div class="li">NSC</div>
+        <div><h1>Past Papers</h1><div class="sub">South Africa · DBE · Grades 8–12</div></div>
+      </div>
+      <div class="tabs" id="tabs"></div>
+    </div>
+    <div class="controls">
+      <input type="text" id="search" placeholder="Search subjects..." oninput="render()">
+      <select id="yf" onchange="render()"><option value="">All years</option></select>
+      <select id="ef" onchange="render()">
+        <option value="">All exam types</option>
+        <option value="nov">November (NSC)</option>
+        <option value="june">June</option>
+        <option value="mock">Mock / Trial</option>
+        <option value="march">March Test</option>
+      </select>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="notice">
+    <svg width="15" height="15" viewBox="0 0 16 16" fill="none" style="flex-shrink:0;margin-top:1px"><circle cx="8" cy="8" r="7" stroke="#1E4D3B" stroke-width="1.5"/><path d="M8 7v4M8 5.5v.5" stroke="#1E4D3B" stroke-width="1.5" stroke-linecap="round"/></svg>
+    Click any button to <strong>open that exam PDF directly</strong>. Only subjects with mapped direct PDFs are shown.
+  </div>
+  <div class="sr" id="stats"></div>
+  <div id="content"></div>
+</main>
+<footer>NSC Past Papers Browser · Direct PDFs when available · No subject fallback pages opened automatically · Content from the Department of Basic Education</footer>
+
+<script>
+// Google Drive file IDs or direct PDF URLs scraped from source pages
+// Format: PAPERS[subject][year][examType] = file ID or full direct URL
+// If the entry is a URL, it is used as-is; otherwise it is treated as a Google Drive file ID.
+const PAPERS = {
+  "Mathematics": {
+    2024: { nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=8W2dAxBUTQA%3d&tabid=5193&portalid=0&mid=13724&forcedownload=true", june: null, mock: null, march: null },
+    2023: {
+      nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=M_7mZq2zE5o%3d&tabid=4682&portalid=0&mid=12681&forcedownload=true",
+      june: "1YF-bxjSp29cNrCUGw8Y-IMpxUZVzMNGw",
+      mock: "1hLMnrzpFJdsWM1L3Xl8ufi7E5PcR1x_d",
+      march: "1gB3vVCdUWpcojxryWfaMqGCm3sg7aOp2"
+    },
+    2022: {
+      nov: "1DCMc2FvfXzba4BihWOWeJpzaZPEORCL5",
+      june: "1kIdfskDoHwtqW9PSOU0DTAp2iA9xryCA",
+      mock: "1jx1OD6dtOv7iR4HLpnSGesD4Xv2tbGiP",
+      march: "1yPjjmD-yN_HaNUIBzofFvkvyg8lCl2Q6"
+    },
+    2021: {
+      nov: null,
+      june: "1kmif9u-WQY9EMOzVHXhv5-410YwPavZq",
+      mock: "1dWALRk7HYHzbl2RsYavXg_4EfqLu_Cng",
+      march: "1kc4lisX2DkWS9NrdkqcAFz3mtMFxQxdr"
+    },
+    2020: { nov: null, june: null, mock: null, march: null },
+    2019: { nov: null, june: null, mock: null, march: null },
+    2018: { nov: null, june: null, mock: null, march: null },
+  },
+  "Physical Sciences": {
+    2024: { nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=jKqWYBbucS4%3d&tabid=5193&portalid=0&mid=13728&forcedownload=true", june: null, mock: null, march: null },
+    2023: {
+      nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=oTJzzXEU6Ng%3d&tabid=4682&portalid=0&mid=12685&forcedownload=true",
+      june: "1GWXgj4Ib7ymR-ArTI0IzSiqNYTKCWNID",
+      mock: "1gUE-MylYjkttXewoWE89hw5-gkxB90_V",
+      march: null
+    },
+    2022: {
+      nov: "1IHL9Wcgou1L9QIboeHSZXZH_zu6PaIpj",
+      june: "1TFiaF098zazX9MNQ6h2C013ONFL0uFJn",
+      mock: "1ecsDwkuQXXPvEj7gdwbvEVkXglGKwZWY",
+      march: null
+    },
+    2021: { nov: null, june: null, mock: null, march: null },
+    2020: { nov: null, june: null, mock: null, march: null },
+  },
+  "Mathematical Literacy": {
+    2024: { nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=r3H6xWQUYXg%3d&tabid=5193&portalid=0&mid=13723&forcedownload=true", june: null, mock: null, march: null },
+    2023: { nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=5VCFfxPhz6k%3d&tabid=4682&portalid=0&mid=12680&forcedownload=true", june: null, mock: null, march: null },
+  },
+  "Life Sciences": {
+    2024: { nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=UH53U88PRPE%3d&tabid=5193&portalid=0&mid=13722&forcedownload=true", june: null, mock: null, march: null },
+    2023: { nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=j4MXMW53vaU%3d&tabid=4682&portalid=0&mid=12679&forcedownload=true", june: null, mock: null, march: null },
+  },
+  "Geography": {
+    2024: { nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=Hc8_CaQJpd4%3d&tabid=5193&portalid=0&mid=13717&forcedownload=true", june: null, mock: null, march: null },
+  },
+  "History": {
+    2024: { nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=qM73YgRemdM%3d&tabid=5193&portalid=0&mid=13718&forcedownload=true", june: null, mock: null, march: null },
+  },
+  "Accounting": {
+    2024: { nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=LPWTS_eR8NI%3d&tabid=5193&portalid=0&mid=13703&forcedownload=true", june: null, mock: null, march: null },
+  },
+  "Business Studies": {
+    2024: { nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=VGv_B_A4kxA%3d&tabid=5193&portalid=0&mid=13707&forcedownload=true", june: null, mock: null, march: null },
+  },
+  "Economics": {
+    2024: { nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=gZ8YszYxrcI%3d&tabid=5193&portalid=0&mid=13714&forcedownload=true", june: null, mock: null, march: null },
+  },
+  "English Home Language": {
+    2024: { nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=de2qPWCUDzw%3d&tabid=5193&portalid=0&mid=13691&forcedownload=true", june: null, mock: null, march: null },
+    2023: { nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=TbjDznPFtSA%3d&tabid=4682&portalid=0&mid=12648&forcedownload=true", june: null, mock: null, march: null },
+  },
+  "English First Additional Language": {
+    2024: { nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=ZJZsyNpCu9Y%3d&tabid=5193&portalid=0&mid=13691&forcedownload=true", june: null, mock: null, march: null },
+    2023: { nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=rzKvzSdEjAU%3d&tabid=4682&portalid=0&mid=12648&forcedownload=true", june: null, mock: null, march: null },
+  },
+  "Afrikaans Home Language": {
+    2024: { nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=d3LjwjOF7Ms%3d&tabid=5193&portalid=0&mid=13690&forcedownload=true", june: null, mock: null, march: null },
+    2023: { nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=V9aNZQKOq2Y%3d&tabid=4682&portalid=0&mid=12647&forcedownload=true", june: null, mock: null, march: null },
+  },
+  "Afrikaans First Additional Language": {
+    2024: { nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=x34Af79ts9s%3d&tabid=5193&portalid=0&mid=13690&forcedownload=true", june: null, mock: null, march: null },
+    2023: { nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=8DIaNaBdxpU%3d&tabid=4682&portalid=0&mid=12647&forcedownload=true", june: null, mock: null, march: null },
+  },
+  "Life Orientation": {
+    2024: { nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=nU_cBEiohTo%3d&tabid=5193&portalid=0&mid=13721&forcedownload=true", june: null, mock: null, march: null },
+  },
+  "Computer Applications Technology": {
+    2024: { nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=p5EqqIZnago%3d&tabid=5193&portalid=0&mid=13709&forcedownload=true", june: null, mock: null, march: null },
+  },
+  "Engineering Graphics and Design": {
+    2024: { nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=Vwa1Fs1GcRQ%3d&tabid=5193&portalid=0&mid=13716&forcedownload=true", june: null, mock: null, march: null },
+  },
+  "Agricultural Sciences": {
+    2024: { nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=fS2uU1NiSaU%3d&tabid=5193&portalid=0&mid=13705&forcedownload=true", june: null, mock: null, march: null },
+  },
+  "Consumer Studies": {
+    2024: { nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=Lyp_k8RVqGs%3d&tabid=5193&portalid=0&mid=13710&forcedownload=true", june: null, mock: null, march: null },
+  },
+  "Tourism": {
+    2024: { nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=KAEKU9bLIrA%3d&tabid=5193&portalid=0&mid=13732&forcedownload=true", june: null, mock: null, march: null },
+  },
+  "Dramatic Arts": {
+    2024: { nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=2zIhDlV1wmg%3d&tabid=5193&portalid=0&mid=13713&forcedownload=true", june: null, mock: null, march: null },
+  },
+  "Information Technology": {
+    2024: { nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=iLLDXRW84F8%3d&tabid=5193&portalid=0&mid=13720&forcedownload=true", june: null, mock: null, march: null },
+  },
+  "Hospitality Studies": {
+    2024: { nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=fbJUNeVm4_c%3d&tabid=5193&portalid=0&mid=13719&forcedownload=true", june: null, mock: null, march: null },
+  },
+  "Civil Technology": {
+    2024: { nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=BwEzgit-_mE%3d&tabid=5193&portalid=0&mid=13708&forcedownload=true", june: null, mock: null, march: null },
+  },
+  "Electrical Technology": {
+    2024: { nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=rpisfR4gTtc%3d&tabid=5193&portalid=0&mid=13715&forcedownload=true", june: null, mock: null, march: null },
+  },
+  "Agricultural Management Practices": {
+    2024: { nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=qNZJV5Mqx8U%3d&tabid=5193&portalid=0&mid=13704&forcedownload=true", june: null, mock: null, march: null },
+  },
+  "Agricultural Technology": {
+    2024: { nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=QRsEHuWEEI0%3d&tabid=5193&portalid=0&mid=13706&forcedownload=true", june: null, mock: null, march: null },
+  },
+  "Dance Studies": {
+    2024: { nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=5vLQjkZ1naI%3d&tabid=5193&portalid=0&mid=13711&forcedownload=true", june: null, mock: null, march: null },
+  },
+  "Design": {
+    2024: { nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=oDGIBuLSy1s%3d&tabid=5193&portalid=0&mid=13712&forcedownload=true", june: null, mock: null, march: null },
+  },
+  "Marine Sciences": {
+    2024: { nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=VHFyT-B9Vpc%3d&tabid=5193&portalid=0&mid=13725&forcedownload=true", june: null, mock: null, march: null },
+  },
+  "Mechanical Technology": {
+    2024: { nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=BLQaWcsh6Wo%3d&tabid=5193&portalid=0&mid=13726&forcedownload=true", june: null, mock: null, march: null },
+  },
+  "Music": {
+    2024: { nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=UyGYDbBc1PA%3d&tabid=5193&portalid=0&mid=13727&forcedownload=true", june: null, mock: null, march: null },
+  },
+  "Religion Studies": {
+    2024: { nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=b645EM6qpYc%3d&tabid=5193&portalid=0&mid=13729&forcedownload=true", june: null, mock: null, march: null },
+  },
+  "Technical Mathematics": {
+    2024: { nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=Ce-A4Q53xYo%3d&tabid=5193&portalid=0&mid=13730&forcedownload=true", june: null, mock: null, march: null },
+  },
+  "Technical Sciences": {
+    2024: { nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=U7OtVvTWZ3E%3d&tabid=5193&portalid=0&mid=13731&forcedownload=true", june: null, mock: null, march: null },
+  },
+  "Visual Arts": {
+    2024: { nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=OV4fnG90lYU%3d&tabid=5193&portalid=0&mid=13733&forcedownload=true", june: null, mock: null, march: null },
+  },
+  "South African Sign Language (Final)": {
+    2024: { nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=R6WJANFMgX4%3d&tabid=5193&portalid=0&mid=13695&forcedownload=true", june: null, mock: null, march: null },
+    2023: { nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=0QrmdSqgRR0%3d&tabid=4682&portalid=0&mid=12652&forcedownload=true", june: null, mock: null, march: null },
+  },
+  "IsiNdebele": {
+    2024: { nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=Ap2a5ptD75A%3d&tabid=5193&portalid=0&mid=13692&forcedownload=true", june: null, mock: null, march: null },
+    2023: { nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=CQJjconfnXA%3d&tabid=4682&portalid=0&mid=12655&forcedownload=true", june: null, mock: null, march: null },
+  },
+  "IsiXhosa": {
+    2024: { nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=29-s28IqI84%3d&tabid=5193&portalid=0&mid=13693&forcedownload=true", june: null, mock: null, march: null },
+    2023: { nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=a7TAJg2y6gQ%3d&tabid=4682&portalid=0&mid=12646&forcedownload=true", june: null, mock: null, march: null },
+  },
+  "IsiZulu": {
+    2024: { nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=1bnRAfafM-U%3d&tabid=5193&portalid=0&mid=13694&forcedownload=true", june: null, mock: null, march: null },
+    2023: { nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=BfP-rQiQs-E%3d&tabid=4682&portalid=0&mid=12651&forcedownload=true", june: null, mock: null, march: null },
+  },
+  "Sepedi": {
+    2024: { nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=PHhGBXbFsOE%3d&tabid=5193&portalid=0&mid=13696&forcedownload=true", june: null, mock: null, march: null },
+    2023: { nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=EGVL2l-V7rM%3d&tabid=4682&portalid=0&mid=12653&forcedownload=true", june: null, mock: null, march: null },
+  },
+  "Setswana": {
+    2024: { nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=65ihDLOboLw%3d&tabid=5193&portalid=0&mid=13697&forcedownload=true", june: null, mock: null, march: null },
+    2023: { nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=7TNYpjnAQeU%3d&tabid=4682&portalid=0&mid=12654&forcedownload=true", june: null, mock: null, march: null },
+  },
+  "Sesotho": {
+    2024: { nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=8TFn2C2q1Fo%3d&tabid=5193&portalid=0&mid=13698&forcedownload=true", june: null, mock: null, march: null },
+    2023: { nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=6J75h6m8Ars%3d&tabid=4682&portalid=0&mid=12649&forcedownload=true", june: null, mock: null, march: null },
+  },
+  "Siswati": {
+    2024: { nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=U46VnMxwSaM%3d&tabid=5193&portalid=0&mid=13699&forcedownload=true", june: null, mock: null, march: null },
+    2023: { nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=6Q8_RL_vLv0%3d&tabid=4682&portalid=0&mid=12656&forcedownload=true", june: null, mock: null, march: null },
+  },
+  "Tshivenda": {
+    2024: { nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=QlDdcXAQdXY%3d&tabid=5193&portalid=0&mid=13700&forcedownload=true", june: null, mock: null, march: null },
+    2023: { nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=wCCGQHOQMJw%3d&tabid=4682&portalid=0&mid=12657&forcedownload=true", june: null, mock: null, march: null },
+  },
+  "Xitsonga": {
+    2024: { nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=T0aNAMsQ6qY%3d&tabid=5193&portalid=0&mid=13701&forcedownload=true", june: null, mock: null, march: null },
+    2023: { nov: "https://www.education.gov.za/LinkClick.aspx?fileticket=54OdJIcuBLc%3d&tabid=4682&portalid=0&mid=12658&forcedownload=true", june: null, mock: null, march: null },
+  },
+};
+
+// Fallback subject page URLs are only used for Grades 8-11.
+// Grade 12 uses official DBE direct PDF links when available.
+// No third-party source pages are opened automatically from the paper cards.
+const FALLBACK_URLS = {
+  12: {
+    "Mathematics":                        "https://www.education.gov.za/2024NSCNovemberpastpapers.aspx",
+    "Mathematical Literacy":              "https://www.education.gov.za/2024NSCNovemberpastpapers.aspx",
+    "Physical Sciences":                  "https://www.education.gov.za/2024NSCNovemberpastpapers.aspx",
+    "Life Sciences":                      "https://www.education.gov.za/2024NSCNovemberpastpapers.aspx",
+    "Geography":                          "https://www.education.gov.za/2024NSCNovemberpastpapers.aspx",
+    "History":                            "https://www.education.gov.za/2024NSCNovemberpastpapers.aspx",
+    "Accounting":                         "https://www.education.gov.za/2024NSCNovemberpastpapers.aspx",
+    "Business Studies":                   "https://www.education.gov.za/2024NSCNovemberpastpapers.aspx",
+    "Economics":                          "https://www.education.gov.za/2024NSCNovemberpastpapers.aspx",
+    "English Home Language":              "https://www.education.gov.za/2024NSCNovemberpastpapers.aspx",
+    "English First Additional Language":  "https://www.education.gov.za/2024NSCNovemberpastpapers.aspx",
+    "Afrikaans Home Language":            "https://www.education.gov.za/2024NSCNovemberpastpapers.aspx",
+    "Afrikaans First Additional Language":"https://www.education.gov.za/2024NSCNovemberpastpapers.aspx",
+    "Life Orientation":                   "https://www.education.gov.za/2024NSCNovemberpastpapers.aspx",
+    "Computer Applications Technology":   "https://www.education.gov.za/2024NSCNovemberpastpapers.aspx",
+    "Engineering Graphics and Design":    "https://www.education.gov.za/2024NSCNovemberpastpapers.aspx",
+    "Agricultural Sciences":              "https://www.education.gov.za/2024NSCNovemberpastpapers.aspx",
+    "Consumer Studies":                   "https://www.education.gov.za/2024NSCNovemberpastpapers.aspx",
+    "Tourism":                            "https://www.education.gov.za/2024NSCNovemberpastpapers.aspx",
+    "Dramatic Arts":                      "https://www.education.gov.za/2024NSCNovemberpastpapers.aspx",
+    "Information Technology":             "https://www.education.gov.za/2024NSCNovemberpastpapers.aspx",
+    "Hospitality Studies":                "https://www.education.gov.za/2024NSCNovemberpastpapers.aspx",
+    "Civil Technology":                   "https://www.education.gov.za/2024NSCNovemberpastpapers.aspx",
+    "Electrical Technology":              "https://www.education.gov.za/2024NSCNovemberpastpapers.aspx",
+    "Agricultural Management Practices": "https://www.education.gov.za/2024NSCNovemberpastpapers.aspx",
+    "Agricultural Technology":           "https://www.education.gov.za/2024NSCNovemberpastpapers.aspx",
+    "Dance Studies":                     "https://www.education.gov.za/2024NSCNovemberpastpapers.aspx",
+    "Design":                            "https://www.education.gov.za/2024NSCNovemberpastpapers.aspx",
+    "Marine Sciences":                   "https://www.education.gov.za/2024NSCNovemberpastpapers.aspx",
+    "Mechanical Technology":             "https://www.education.gov.za/2024NSCNovemberpastpapers.aspx",
+    "Music":                             "https://www.education.gov.za/2024NSCNovemberpastpapers.aspx",
+    "Religion Studies":                  "https://www.education.gov.za/2024NSCNovemberpastpapers.aspx",
+    "Technical Mathematics":             "https://www.education.gov.za/2024NSCNovemberpastpapers.aspx",
+    "Technical Sciences":                "https://www.education.gov.za/2024NSCNovemberpastpapers.aspx",
+    "Visual Arts":                       "https://www.education.gov.za/2024NSCNovemberpastpapers.aspx",
+    "South African Sign Language (Final)":"https://www.education.gov.za/2024NSCNovemberpastpapers.aspx",
+    "IsiNdebele":                        "https://www.education.gov.za/2024NSCNovemberpastpapers.aspx",
+    "IsiXhosa":                          "https://www.education.gov.za/2024NSCNovemberpastpapers.aspx",
+    "IsiZulu":                           "https://www.education.gov.za/2024NSCNovemberpastpapers.aspx",
+    "Sepedi":                            "https://www.education.gov.za/2024NSCNovemberpastpapers.aspx",
+    "Setswana":                          "https://www.education.gov.za/2024NSCNovemberpastpapers.aspx",
+    "Sesotho":                           "https://www.education.gov.za/2024NSCNovemberpastpapers.aspx",
+    "Siswati":                           "https://www.education.gov.za/2024NSCNovemberpastpapers.aspx",
+    "Tshivenda":                         "https://www.education.gov.za/2024NSCNovemberpastpapers.aspx",
+    "Xitsonga":                          "https://www.education.gov.za/2024NSCNovemberpastpapers.aspx",
+  },
+  11: {
+    "Mathematics":                        "https://www.testpapers.co.za/gr11/mathematics",
+    "Mathematical Literacy":              "https://www.testpapers.co.za/gr11/mathematical-literacy",
+    "Physical Sciences":                  "https://www.testpapers.co.za/gr11/physical-sciences",
+    "Life Sciences":                      "https://www.testpapers.co.za/gr11/life-sciences",
+    "Geography":                          "https://www.testpapers.co.za/gr11/geography",
+    "History":                            "https://www.testpapers.co.za/gr11/history",
+    "Accounting":                         "https://www.testpapers.co.za/gr11/accounting",
+    "Business Studies":                   "https://www.testpapers.co.za/gr11/business-studies",
+    "Economics":                          "https://www.testpapers.co.za/gr11/economics",
+    "English Home Language":              "https://www.testpapers.co.za/gr11/english-home-language",
+    "English First Additional Language":  "https://www.testpapers.co.za/gr11/english-fal",
+    "Life Orientation":                   "https://www.testpapers.co.za/gr11/life-orientation",
+    "Computer Applications Technology":   "https://www.testpapers.co.za/gr11/computer-applications-technology",
+    "Engineering Graphics and Design":    "https://www.testpapers.co.za/gr11/engineering-graphic-and-design",
+    "Agricultural Sciences":              "https://www.testpapers.co.za/gr11/agricultural-sciences",
+  },
+  10: {
+    "Mathematics":                        "https://www.testpapers.co.za/gr10/mathematics",
+    "Mathematical Literacy":              "https://www.testpapers.co.za/gr10/mathematical-literacy",
+    "Physical Sciences":                  "https://www.testpapers.co.za/gr10-phyical-sciences",
+    "Life Sciences":                      "https://www.testpapers.co.za/gr10/life-sciences",
+    "Geography":                          "https://www.testpapers.co.za/gr10/geography",
+    "History":                            "https://www.testpapers.co.za/gr10/history",
+    "Accounting":                         "https://www.testpapers.co.za/gr10/accounting",
+    "Business Studies":                   "https://www.testpapers.co.za/gr10/business-studies",
+    "Economics":                          "https://www.testpapers.co.za/gr10/economics",
+    "English Home Language":              "https://www.testpapers.co.za/gr10/english-home-language",
+    "English First Additional Language":  "https://www.testpapers.co.za/gr10/english-fal",
+    "Life Orientation":                   "https://www.testpapers.co.za/gr10/life-orientation",
+    "Computer Applications Technology":   "https://www.testpapers.co.za/gr10/computer-applications-technology",
+    "Engineering Graphics and Design":    "https://www.testpapers.co.za/gr10/engineering-graphic-and-design",
+    "Agricultural Sciences":              "https://www.testpapers.co.za/gr10/agricultural-sciences",
+  },
+  9: {
+    "Mathematics":                        "https://www.testpapers.co.za/gr9/mathematics",
+    "Mathematical Literacy":              "https://www.testpapers.co.za/gr9/mathematical-literacy",
+    "Physical Sciences":                  "https://www.testpapers.co.za/gr9/physical-sciences",
+    "Life Sciences":                      "https://www.testpapers.co.za/gr9/life-sciences",
+    "Geography":                          "https://www.testpapers.co.za/gr9/geography",
+    "History":                            "https://www.testpapers.co.za/gr9/history",
+    "Accounting":                         "https://www.testpapers.co.za/gr9/accounting",
+    "Business Studies":                   "https://www.testpapers.co.za/gr9/business-studies",
+    "Economics":                          "https://www.testpapers.co.za/gr9/economics",
+    "English Home Language":              "https://www.testpapers.co.za/gr9/english-home-language",
+    "English First Additional Language":  "https://www.testpapers.co.za/gr9/english-fal",
+    "Life Orientation":                   "https://www.testpapers.co.za/gr9/life-orientation",
+    "Computer Applications Technology":   "https://www.testpapers.co.za/gr9/computer-applications-technology",
+    "Engineering Graphics and Design":    "https://www.testpapers.co.za/gr9/engineering-graphic-and-design",
+    "Agricultural Sciences":              "https://www.testpapers.co.za/gr9/agricultural-sciences",
+  },
+  8: {
+    "Mathematics":                        "https://www.testpapers.co.za/gr8/mathematics",
+    "Mathematical Literacy":              "https://www.testpapers.co.za/gr8/mathematical-literacy",
+    "Physical Sciences":                  "https://www.testpapers.co.za/gr8/physical-sciences",
+    "Life Sciences":                      "https://www.testpapers.co.za/gr8/life-sciences",
+    "Geography":                          "https://www.testpapers.co.za/gr8/geography",
+    "History":                            "https://www.testpapers.co.za/gr8/history",
+    "Accounting":                         "https://www.testpapers.co.za/gr8/accounting",
+    "Business Studies":                   "https://www.testpapers.co.za/gr8/business-studies",
+    "Economics":                          "https://www.testpapers.co.za/gr8/economics",
+    "English Home Language":              "https://www.testpapers.co.za/gr8/english-home-language",
+    "English First Additional Language":  "https://www.testpapers.co.za/gr8/english-fal",
+    "Life Orientation":                   "https://www.testpapers.co.za/gr8/life-orientation",
+    "Computer Applications Technology":   "https://www.testpapers.co.za/gr8/computer-applications-technology",
+    "Engineering Graphics and Design":    "https://www.testpapers.co.za/gr8/engineering-graphic-and-design",
+    "Agricultural Sciences":              "https://www.testpapers.co.za/gr8/agricultural-sciences",
+  }
+};
+
+const SUBJECTS_GR12 = [
+  "Mathematics","Mathematical Literacy","Physical Sciences","Life Sciences",
+  "Geography","History","Accounting","Business Studies","Economics",
+  "English Home Language","English First Additional Language",
+  "Afrikaans Home Language","Afrikaans First Additional Language",
+  "Life Orientation","Computer Applications Technology",
+  "Engineering Graphics and Design","Agricultural Sciences",
+  "Consumer Studies","Tourism","Dramatic Arts",
+  "Information Technology","Hospitality Studies","Civil Technology","Electrical Technology",
+  "Agricultural Management Practices","Agricultural Technology","Dance Studies",
+  "Design","Marine Sciences","Mechanical Technology","Music",
+  "Religion Studies","Technical Mathematics","Technical Sciences",
+  "Visual Arts","South African Sign Language (Final)",
+  "IsiNdebele","IsiXhosa","IsiZulu","Sepedi","Setswana",
+  "Sesotho","Siswati","Tshivenda","Xitsonga"
+];
+const SUBJECTS_GR11 = Object.keys(FALLBACK_URLS[11]);
+const SUBJECTS_GR10 = Object.keys(FALLBACK_URLS[10]);
+const SUBJECTS_GR9 = Object.keys(FALLBACK_URLS[9]);
+const SUBJECTS_GR8 = Object.keys(FALLBACK_URLS[8]);
+
+const EXAMS = [
+  {id:"nov",  label:"NSC Nov", cls:"eb-nov",   minY:2014, maxY:2024},
+  {id:"june", label:"June",    cls:"eb-june",  minY:2018, maxY:2025},
+  {id:"mock", label:"Mock",    cls:"eb-mock",  minY:2019, maxY:2025},
+  {id:"march",label:"March",   cls:"eb-march", minY:2021, maxY:2025},
+];
+const YEARS = [2025,2024,2023,2022,2021,2020,2019,2018,2017,2016,2015,2014];
+
+let G = 12;
+
+function driveUrl(fileId) {
+  if (!fileId || String(fileId).trim() === '') return null;
+  if (/^https?:\/\//i.test(fileId)) {
+    return fileId;
+  }
+  return `https://drive.google.com/uc?export=download&id=${fileId}`;
+}
+
+function getPaperUrl(subject, year, examId) {
+  const subData = PAPERS[subject];
+  if (subData && subData[year] && subData[year][examId]) {
+    return driveUrl(subData[year][examId]);
+  }
+  return null;
+}
+
+function getFallback(subject) {
+  return null;
+}
+
+function init() {
+  const sel = document.getElementById('yf');
+  YEARS.forEach(y => { const o=document.createElement('option'); o.value=y; o.textContent=y; sel.appendChild(o); });
+  renderTabs(); render();
+}
+
+function renderTabs() {
+  const el = document.getElementById('tabs');
+  el.innerHTML = '';
+  [8,9,10,11,12].forEach(g => {
+    const b = document.createElement('button');
+    b.className = 'tab'+(g===G?' active':'');
+    b.textContent = 'Grade '+g;
+    b.onclick = ()=>{ G=g; renderTabs(); render(); };
+    el.appendChild(b);
+  });
+}
+
+function render() {
+  const q = document.getElementById('search').value.trim().toLowerCase();
+  const yf = document.getElementById('yf').value;
+  const ef = document.getElementById('ef').value;
+
+  const subjects = G===12 ? SUBJECTS_GR12 : G===11 ? SUBJECTS_GR11 : G===10 ? SUBJECTS_GR10 : G===9 ? SUBJECTS_GR9 : SUBJECTS_GR8;
+
+  const cards = [];
+  subjects.forEach(sub => {
+    if (q && !sub.toLowerCase().includes(q)) return;
+    YEARS.forEach(yr => {
+      if (yf && yr != yf) return;
+      EXAMS.forEach(ex => {
+        if (ef && ef !== ex.id) return;
+        if (yr < ex.minY || yr > ex.maxY) return;
+        const paperUrl = getPaperUrl(sub, yr, ex.id);
+        if (!paperUrl) return;
+        cards.push({sub, yr, ex, paperUrl});
+      });
+    });
+  });
+
+  const us = [...new Set(cards.map(c=>c.sub))].length;
+  const uy = [...new Set(cards.map(c=>c.yr))].length;
+  document.getElementById('stats').innerHTML = `
+    <div class="sc"><div class="sn">${cards.length}</div><div class="sl">Exam sets</div></div>
+    <div class="sc"><div class="sn">${us}</div><div class="sl">Subjects</div></div>
+    <div class="sc"><div class="sn">${uy}</div><div class="sl">Years</div></div>
+  `;
+
+  const content = document.getElementById('content');
+  if (!cards.length) {
+    content.innerHTML = `<div class="empty"><h3>No papers found</h3><p>Try adjusting your filters.</p></div>`;
+    return;
+  }
+
+  // Group by subject
+  const bySub = {};
+  cards.forEach(c => { if(!bySub[c.sub]) bySub[c.sub]=[]; bySub[c.sub].push(c); });
+
+  content.innerHTML = '';
+  Object.keys(bySub).sort().forEach(sub => {
+    const sec = document.createElement('div');
+    sec.className = 'subject-block';
+    sec.innerHTML = `<div class="subject-hdr">
+      <div class="sname">${sub}</div>
+      <div class="sline"></div>
+      <div class="scnt">${bySub[sub].length} set${bySub[sub].length!==1?'s':''}</div>
+    </div>`;
+
+    const grid = document.createElement('div');
+    grid.className = 'papers-grid';
+
+    bySub[sub].sort((a,b)=>b.yr-a.yr).forEach(card => {
+      const paperUrl = card.paperUrl;
+
+      // Build action buttons
+      // If we have a direct PDF URL, open it directly in a new tab.
+      let actionHtml = `<a class="db db-p1" href="${paperUrl}" target="_blank" rel="noopener">
+          <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M2 10h8M6 2v6M3.5 5.5L6 8l2.5-2.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Open PDF
+        </a>`;
+
+      const el = document.createElement('div');
+      el.className = 'paper-card';
+      el.innerHTML = `
+        <div class="ct">
+          <div class="cy">${card.yr}</div>
+          <span class="eb ${card.ex.cls}">${card.ex.label}</span>
+        </div>
+        <div style="font-size:13px;color:var(--muted)">Grade ${G} · ${card.sub}</div>
+        <div class="ca">${actionHtml}</div>
+        <div class="cf">
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 9h6M5 1v6M2.5 4.5L5 7l2.5-2.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg> Opens direct PDF download
+        </div>
+      `;
+      grid.appendChild(el);
+    });
+    sec.appendChild(grid);
+    content.appendChild(sec);
+  });
+}
+
+init();
+</script>
+</body>
+</html>
